@@ -10,5 +10,8 @@ class IndexController extends Controller{
 
     public function indexAction(){
        
+       $mail = new MailsService();
+       $mail->send();
+       exit;
     }
 }

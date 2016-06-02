@@ -15,6 +15,6 @@ define('CONFIG_PATH', APP_PATH . '/config');
 
 define('CACHE_PATH', BASE_PATH . '/public/cache/');
 
-define('CACHE_TIME', 3600);
+define('CACHE_TIME', 0);
 
 require_once APP_PATH . '/app.php';
