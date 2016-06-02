@@ -11,7 +11,7 @@ class MailsService{
 	}
 
 	public function send(){
-		$this->mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
+		$this->mail->Host = 'smtp.exmail.qq.com';  // Specify main and backup SMTP servers
 		$this->mail->SMTPAuth = true;                               // Enable SMTP authentication
 		$this->mail->Username = 'admin@wecall.me';                 // SMTP username
 		$this->mail->Password = 'Zxcvb@12345';                           // SMTP password
