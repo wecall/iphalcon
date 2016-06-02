@@ -3,40 +3,62 @@
 class MailsService{
 
 	private $mail;
+	private $config;
+	private $channel;
 
-	public function __construct(){
+	public function __construct($channel='qq.exmail'){
 		require_once(APP_PATH."/services/PHPMailer/PHPMailerAutoload.php");
 
 		$this->mail = new PHPMailer;
+		$this->channel = sprintf("email.%s",$channel);
 	}
 
-	public function send(){
-		$this->mail->Host = 'smtp.exmail.qq.com';  // Specify main and backup SMTP servers
-		$this->mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$this->mail->Username = 'admin@wecall.me';                 // SMTP username
-		$this->mail->Password = 'Zxcvb@12345';                           // SMTP password
-		$this->mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-		$this->mail->Port = 25;                                    // TCP port to connect to
+	/**
+	 * 邮件服务基本设置
+	 */
+	private function setting(){
+		$this->config  = config($this->channel);
+		// 发邮件服务器
+		$this->mail->Host = $this->config["host"];
+		// Enable SMTP authentication
+		$this->mail->SMTPAuth = true;
+		// 邮件服务器用户
+		$this->mail->Username = $this->config["username"];
+		// 邮件服务器密码
+		$this->mail->Password = $this->config["password"];
+		// 安全协议
+		$this->mail->SMTPSecure = "tls";
+		// 邮件发送人
+		$this->mail->setFrom($this->config["fromMailer"],"来源：");
+		$this->mail->addReplyTo($this->config["replyTo"], "回复:");
+	}
 
-		$this->mail->setFrom('help@wecall.me', 'Mailer');
-		$this->mail->addAddress('416994628@qq.com', '416994628');     // Add a recipient
-		$this->mail->addReplyTo('admin@wecall.me', 'replayToAdmin');
-		// $this->mail->addCC('cc@example.com');
-		// $this->mail->addBCC('bcc@example.com');
+	/**
+	 * 单个地址发送
+	 * @address  收件人地址
+	 * @subject  邮件主题
+	 * @content  内容
+	 * @attachments 附件存放地址
+	 */
+	public function send($address,$subject="",$content="",$attachments = array()){
+		
+		$this->mail->addAddress($address);
+		
+		if (count($attachments) > 0) {
+			foreach ($attachments as $item_url) {
+				$this->mail->addAttachment($item_url);
+			}
+		}
+		$this->mail->isHTML(true);
 
-		// $this->mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-		// $this->mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-		$this->mail->isHTML(true);                                  // Set email format to HTML
-
-		$this->mail->Subject = 'Here is the subject';
-		$this->mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-		$this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		$this->mail->Subject = $subject;
+		$this->mail->Body    = $content;
+		$this->mail->AltBody = $subject;
 
 		if(!$this->mail->send()) {
-		    echo 'Message could not be sent.';
-		    echo 'Mailer Error: ' . $this->mail->ErrorInfo;
+		    return $this->mail->ErrorInfo;
 		} else {
-		    echo 'Message has been sent';
+		    return true;
 		}
 	}
 }
