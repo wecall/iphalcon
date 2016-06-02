@@ -19,7 +19,7 @@ class MailsService{
 		$this->mail->Port = 25;                                    // TCP port to connect to
 
 		$this->mail->setFrom('help@wecall.me', 'Mailer');
-		$this->mail->addAddress('wecall@aliyun.com', 'Wecall');     // Add a recipient
+		$this->mail->addAddress('416994628@qq.com', '416994628');     // Add a recipient
 		$this->mail->addReplyTo('admin@wecall.me', 'replayToAdmin');
 		// $this->mail->addCC('cc@example.com');
 		// $this->mail->addBCC('bcc@example.com');
