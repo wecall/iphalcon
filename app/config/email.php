@@ -1,6 +1,16 @@
 <?php
 //设置默认连接
 $config['qq'] = array(
+	// 个人邮箱
+	"email"  => array(
+		"host" 		=> "smtp.qq.com",
+		"port" 		=> "465",
+		"username" 	=> "416994628@qq.com",
+		"password"  => "Chen1125rong,./",
+		"fromMailer"=> "416994628@qq.com",
+		"replyTo"   => "416994628@qq.com"
+	),
+	// 企业邮箱
 	"exmail" => array(
 		"host" 		=> "smtp.exmail.qq.com",
 		"port" 		=> "465",
