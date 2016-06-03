@@ -11,7 +11,7 @@ class IndexController extends Controller{
     public function indexAction(){
        $mongodb = new  MongoService();
        $mongodb->setDb("imovie","qrcodes");
-	   echo ($mongodb->mongodb->count());
+	   var_dump($mongodb->count());
 	   exit;
        // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
        $mail = new MailsService();
