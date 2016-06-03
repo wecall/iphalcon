@@ -42,6 +42,8 @@ class MailsService{
 	 */
 	public function send($address,$subject="",$content="",$attachments = array()){
 		
+		$this->setting();
+		
 		$this->mail->addAddress($address);
 		
 		if (count($attachments) > 0) {
