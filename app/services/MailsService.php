@@ -18,6 +18,8 @@ class MailsService{
 	 */
 	private function setting(){
 		$this->config  = config($this->channel);
+		var_dump($this->config);
+		exit;
 		// 发邮件服务器
 		$this->mail->Host = $this->config["host"];
 		// Enable SMTP authentication
@@ -43,7 +45,7 @@ class MailsService{
 	public function send($address,$subject="",$content="",$attachments = array()){
 		
 		$this->setting();
-		
+
 		$this->mail->addAddress($address);
 		
 		if (count($attachments) > 0) {
