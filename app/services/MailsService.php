@@ -18,8 +18,7 @@ class MailsService{
 	 */
 	private function setting(){
 		$this->config  = config($this->channel);
-		var_dump($this->config);
-		exit;
+		
 		// 发邮件服务器
 		$this->mail->Host = $this->config["host"];
 		// Enable SMTP authentication
