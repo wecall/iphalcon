@@ -30,7 +30,7 @@ class MailsService{
 		// 邮件服务器密码
 		$this->mail->Password = $this->config["password"];
 		// 安全协议
-		$this->mail->SMTPSecure = "tls";
+		$this->mail->SMTPSecure = "ssl";
 		// 邮件发送人
 		$this->mail->setFrom($this->config["fromMailer"],"来源：");
 		$this->mail->addReplyTo($this->config["replyTo"], "回复:");
