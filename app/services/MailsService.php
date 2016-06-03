@@ -10,6 +10,8 @@ class MailsService{
 		require_once(APP_PATH."/services/PHPMailer/PHPMailerAutoload.php");
 
 		$this->mail = new PHPMailer;
+		// debug 
+		$this->mail->SMTPDebug = 3;
 		$this->channel = sprintf("email.%s",$channel);
 	}
 
@@ -56,7 +58,7 @@ class MailsService{
 		$this->mail->Subject = $subject;
 		$this->mail->Body    = $content;
 		$this->mail->AltBody = $subject;
-		
+
 		if(!$this->mail->send()) {
 		    return $this->mail->ErrorInfo;
 		} else {
