@@ -50,11 +50,12 @@ class MailsService{
 			}
 		}
 		$this->mail->isHTML(true);
-
 		$this->mail->Subject = $subject;
 		$this->mail->Body    = $content;
 		$this->mail->AltBody = $subject;
 
+		var_dump($this->mail);
+		exit;
 		if(!$this->mail->send()) {
 		    return $this->mail->ErrorInfo;
 		} else {
