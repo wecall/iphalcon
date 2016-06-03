@@ -21,23 +21,6 @@ class MongoService{
     }
 
     /**
-     * 获取Db实例
-     *
-     * @param bool $master
-     *
-     * @return mixed
-     */
-    public static function getInstance($db,$collection) {
-
-        if (!isset(self::$_mongoDB))
-        {
-            self::$_mongoDB = self::init($db,$collection);
-        }
-
-        return self::$_mongoDB;
-    }
-
-    /**
      * Init The Class
      *
      * @param string $db  
