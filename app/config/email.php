@@ -6,8 +6,8 @@ $config['qq'] = array(
 		"port" 		=> "465",
 		"username" 	=> "admin@wecall.me",
 		"password"  => "Zxcvb@123456",
-		"fromMailer"=> "help@wecall.me",
-		"replyTo"   => "help@wecall.me",
+		"fromMailer"=> "admin@wecall.me",
+		"replyTo"   => "admin@wecall.me",
 	)
 );
 
