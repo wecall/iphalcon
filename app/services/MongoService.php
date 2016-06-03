@@ -47,8 +47,7 @@ class MongoService{
     {
         if (! self::$_mongoDB) {
         	// 获取配置
-            $config_mongodb = config('mongodb');
-            $config = $config_mongodb[0];
+            $config = config('mongodb');
             $conStr = "mongodb://";
             if ($config['username'] && $config['password']) {
                 $conStr .= "{$config['username']}:{$config['password']}@";

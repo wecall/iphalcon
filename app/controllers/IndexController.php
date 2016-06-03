@@ -9,7 +9,8 @@ class IndexController extends Controller{
     }
 
     public function indexAction(){
-       $mongodb = new  MongoService("imovie","qrcodes");
+       // $mongodb = new  MongoService("imovie","qrcodes");
+       $mongodb = MongoService::getInstance("imovie","qrcodes");
 	   var_dump($mongodb->count());
 	   exit;
        // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
