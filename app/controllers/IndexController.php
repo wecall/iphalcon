@@ -11,9 +11,10 @@ class IndexController extends Controller{
     public function indexAction(){
       // RollingCURL 服务测试
       $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies.txt");
-      echo $cookie ;
-      exit;
+
       $curl = new RollingCurlService();
+      var_dump($curl);
+      exit;
       $curl->set_cookie($cookie);
       $curl->set_gzip(true);
       $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
