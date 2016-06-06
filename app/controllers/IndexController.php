@@ -11,6 +11,8 @@ class IndexController extends Controller{
     public function indexAction(){
       // RollingCURL 服务测试
       $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies.txt");
+      echo $cookie ;
+      exit;
       $curl = new RollingCurlService();
       $curl->set_cookie($cookie);
       $curl->set_gzip(true);
@@ -26,8 +28,8 @@ class IndexController extends Controller{
 	    // exit;
       
       // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
-      $mail = new MailsService("qq.email");
-      var_dump($mail->send("416994628@163.com","测试邮件地址","<b>文本测试</b>"));
+      // $mail = new MailsService("qq.email");
+      // var_dump($mail->send("416994628@163.com","测试邮件地址","<b>文本测试</b>"));
       exit;
     }
 
