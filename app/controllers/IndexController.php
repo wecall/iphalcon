@@ -12,6 +12,8 @@ class IndexController extends Controller{
       // 测试知乎数据
       $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies1.txt");
       $config = config("curl.zhihu");
+      var_dump($config);
+      exit;
       $curl = new RollingCurlService();
       $curl->set_cookie($cookie);
       $curl->set_gzip(true);
