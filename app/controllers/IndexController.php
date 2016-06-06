@@ -18,8 +18,17 @@ class IndexController extends Controller{
       $curl->set_gzip(true);
       $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
       $curl->get($url);
+      $curl->callback = function($response, $info, $request, $error) {
+        var_dump($response);
+        echo "-------------<br/>";
+        var_dump($info);
+        echo "-------------<br/>";
+        var_dump($request);
+        echo "-------------<br/>";
+        var_dump($error);
+        echo "-------------<br/>";
+      };
       $data = $curl->execute();
-      var_dump($data);
       file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
       exit;
       // mongodb服务测试   ----------------------------------  成功

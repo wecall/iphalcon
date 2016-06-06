@@ -346,11 +346,7 @@ class RollingCurlService{
         $request = array_shift($this->requests);
         $options = $this->get_options($request);
         curl_setopt_array($ch, $options);
-        var_dump($request);
-        echo "-----------------------";
-        var_dump($options);
-        echo "-----------------------";
-        $output = curl_exec($ch);
+        $output = curl_exec($ch);   
 
         $info = curl_getinfo($ch);
         $error = null;
