@@ -13,14 +13,13 @@ class IndexController extends Controller{
       $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies.txt");
 
       $curl = new RollingCurlService();
-      var_dump($curl);
-      exit;
+
       $curl->set_cookie($cookie);
       $curl->set_gzip(true);
       $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
       $curl->get($url);
       $data = $curl->execute();
-      echo $data;
+      var_dump($data);
       file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
       exit;
       // mongodb服务测试   ----------------------------------  成功
