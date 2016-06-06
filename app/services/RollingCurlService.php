@@ -222,6 +222,7 @@ class RollingCurlService{
     public function request($url, $method = "GET", $fields = array(), $headers = array(), $options = array())
     {
         $this->requests[] = array('url'=>$url,'method'=>$method,'fields'=>$fields,'headers'=>$headers,'options'=>$options);
+        var_dump($this->requests);
         return true;
     }
 
@@ -294,7 +295,6 @@ class RollingCurlService{
      */
     public function get($url, $fields = array(), $headers = array(), $options = array())
     {
-        var_dump($this->request($url, 'get', $fields, $headers, $options));
         return $this->request($url, 'get', $fields, $headers, $options);
     }
 
@@ -348,6 +348,9 @@ class RollingCurlService{
         $options = $this->get_options($request);
         curl_setopt_array($ch, $options);
         $output = curl_exec($ch);
+        var_dump($output);
+        echo "-----------------------";
+
         $info = curl_getinfo($ch);
         $error = null;
         if ($output === false)
