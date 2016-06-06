@@ -18,7 +18,7 @@ class IndexController extends Controller{
       $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
       $curl->get($url,array(),$config["header"],$config["options"]);
       $data = $curl->execute();
-      var_dump($data);
+      echo $data;
       file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
       exit;
       // RollingCURL 服务测试
