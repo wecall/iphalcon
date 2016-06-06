@@ -15,10 +15,8 @@ class IndexController extends Controller{
       $curl = new RollingCurlService();
       $curl->set_cookie($cookie);
       $curl->set_gzip(true);
-      $curl->set_headers($config["header"]);
-      
       $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
-      $curl->get($url,array(),array(),$config["options"]);
+      $curl->get($url,array(),$config["header"],$config["options"]);
       $data = $curl->execute();
       var_dump($data);
       file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
