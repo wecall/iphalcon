@@ -112,6 +112,9 @@ class BeanUtil
         return preg_replace_callback("/^(.)/", function($r) { return strtolower($r[1]); }, $rs);
     }
 
+    /**
+     * 对象转数组
+     */
     public static function object2Array($obj, $filter = null, $removeNull = false)
     {
         $rt = array();

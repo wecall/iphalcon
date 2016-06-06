@@ -27,7 +27,7 @@ class RollingCurlService{
      *
      * Timeout is the timeout used for curl_multi_select.
      */
-    private $timeout = 10;
+    private $timeout = 100;
 
     /**
      * @var string|array
@@ -188,7 +188,7 @@ class RollingCurlService{
      */
     public function set_headers($headers)
     {
-        $this->options[CURLOPT_TIMEOUT] = $headers;
+        $this->options[CURLOPT_HTTPHEADER] = $headers;
     }
 
     /**
