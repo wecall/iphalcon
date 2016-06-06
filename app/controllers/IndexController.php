@@ -67,8 +67,8 @@ class IndexController extends Controller{
 
 
       public function testAction(){
-            $url = "https://www.zhihu.com/";
-
+            // $url = "https://www.zhihu.com/";
+            $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
             $ch = curl_init();
             // 设置浏览器的特定header
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
