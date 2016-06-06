@@ -294,6 +294,7 @@ class RollingCurlService{
      */
     public function get($url, $fields = array(), $headers = array(), $options = array())
     {
+        var_dump($this->request($url, 'get', $fields, $headers, $options));
         return $this->request($url, 'get', $fields, $headers, $options);
     }
 
