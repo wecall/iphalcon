@@ -9,7 +9,24 @@ class IndexController extends Controller{
     }
 
     public function indexAction(){ 
+      // 测试 worker 
+      // $w = new Worker();
+      // $w->count = 8;
+      // $w->is_once = true;
+      // // 每个进程循环多少次
+      // $count = 100;        
+      // $w->on_worker_start = function($worker) use ($count) {
 
+      //     //$progress_id = posix_getpid();
+
+      //     for ($i = 0; $i < $count; $i++) 
+      //     {
+      //       // 处理业务
+      //       // ...
+      //     }
+      // }; 
+      // $w->run();
+      // exit;
       // // 测试Redis 服务
       // $redisObj = new RedisService($this->redis);
       // $redisObj->set("admin","admin",120);
