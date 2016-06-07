@@ -6,7 +6,7 @@ $config['qq'] = array(
 		"host" 		=> "smtp.qq.com",
 		"port" 		=> "465",
 		"username" 	=> "wecall@ronchen.me",
-		"password"  => "charzl715<>?",
+		"password"  => "***",
 		"fromMailer"=> "416994628@qq.com",
 		"replyTo"   => "416994628@qq.com"
 	),
@@ -15,7 +15,7 @@ $config['qq'] = array(
 		"host" 		=> "smtp.exmail.qq.com",
 		"port" 		=> "465",
 		"username" 	=> "admin@wecall.me",
-		"password"  => "Zxcvb@123456",
+		"password"  => "***",
 		"fromMailer"=> "admin@wecall.me",
 		"replyTo"   => "admin@wecall.me",
 	)
