@@ -23,8 +23,14 @@ class MailsService{
 		
 		// 发邮件服务器
 		$this->mail->Host = $this->config["host"];
+		// 端口
+		$this->mail->Port = $this->config["port"];
+		// 发件人主机
+		$this->mail->Hostname = 'ronchen.me';
 		// Enable SMTP authentication
 		$this->mail->SMTPAuth = true;
+		//设置发送的邮件的编码 
+		$this->mail->CharSet = 'UTF-8';
 		// 邮件服务器用户
 		$this->mail->Username = $this->config["username"];
 		// 邮件服务器密码

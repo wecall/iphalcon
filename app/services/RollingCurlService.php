@@ -345,10 +345,7 @@ class RollingCurlService{
         // 从请求队列里面弹出一个来
         $request = array_shift($this->requests);
         $options = $this->get_options($request);
-
-        echo "--------1--------------<br/>";
-        print_r($options);
-        echo "--------1--------------<br/>";
+        
         curl_setopt_array($ch, $options);
         $output = curl_exec($ch);   
 
