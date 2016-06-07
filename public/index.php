@@ -14,6 +14,8 @@ define('LOGS_PATH', APP_PATH . '/logs');
 define('CONFIG_PATH', APP_PATH . '/config');
 
 define('CACHE_PATH', BASE_PATH . '/public/cache/');
+// 定义远程获取图片的存储路径
+define('IMG_PATH', BASE_PATH . '/public/upload/original/');
 
 define('CACHE_TIME', 0);
 

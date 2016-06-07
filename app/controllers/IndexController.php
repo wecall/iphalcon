@@ -10,6 +10,12 @@ class IndexController extends Controller{
 
     public function indexAction(){ 
 
+      // // 测试Redis 服务
+      // $redisObj = new RedisService($this->redis);
+      // $redisObj->set("admin","admin",120);
+      // echo  $redisObj->get("admin");
+      // exit;
+
       // 测试知乎数据
       // $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies1.txt");
       // try {
@@ -66,10 +72,10 @@ class IndexController extends Controller{
 	    // var_dump($mongodb->count());
 	    // exit;
       
-      // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
-      $mail = new MailsService("qq.email");
-      var_dump($mail->send("416994628@163.com","测试邮件地址","<b>文本测试</b>"));
-      exit;
+      // // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
+      // $mail = new MailsService("qq.email");
+      // var_dump($mail->sendmail("416994628@163.com","测试邮件地址","<b>文本测试</b>"));
+      // exit;
     }
 
 
