@@ -16,7 +16,6 @@ class IndexController extends Controller{
       // // 每个进程循环多少次
       // $count = 100;        
       // $w->on_worker_start = function($worker) use ($count) {
-
       //     //$progress_id = posix_getpid();
 
       //     for ($i = 0; $i < $count; $i++) 
@@ -27,6 +26,7 @@ class IndexController extends Controller{
       // }; 
       // $w->run();
       // exit;
+
       // // 测试Redis 服务
       // $redisObj = new RedisService($this->redis);
       // $redisObj->set("admin","admin",120);
@@ -41,7 +41,6 @@ class IndexController extends Controller{
       // } catch (Exception $e) {
       //   echo $e->getMessage();
       // }
-      
       // $curl = new RollingCurlService();
       // $curl->set_cookie($cookie);
       // $curl->set_gzip(true);
@@ -51,11 +50,10 @@ class IndexController extends Controller{
       // echo $data;
       // file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
       // exit;
+
       // RollingCURL 服务测试
       // $cookie = file_get_contents(BASE_PATH."/public/cookie/zhihu_cookies.txt");
-
       // $curl = new RollingCurlService();
-
       // $curl->set_cookie($cookie);
       // $curl->set_gzip(true);
       // // $url = "http://www.zhihu.com/people/dai-shu-qiong/about";
@@ -69,7 +67,6 @@ class IndexController extends Controller{
       // $header[] = "Accept-Language: en-us,en;q=0.5"; 
       // $header[] = "Accept-Encoding: gzip";
       // $header[] = "Pragma: "; // browsers keep this blank. 
-
       // $curl->get($url,array(),$header);
       // $curl->callback = function($response, $info, $request, $error) {
       //   var_dump($response);
@@ -84,6 +81,7 @@ class IndexController extends Controller{
       // $data = $curl->execute();
       // file_put_contents(BASE_PATH."/public/cookie/zhihu_data.html",$data);
       // exit;
+
       // mongodb服务测试   ----------------------------------  成功
       // $mongodb = new  MongoService("imovie","qrcodes");
 	    // var_dump($mongodb->count());
