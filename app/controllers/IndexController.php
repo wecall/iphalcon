@@ -9,6 +9,11 @@ class IndexController extends Controller{
     }
 
     public function indexAction(){ 
+      // 测试Fetcher
+      $fetcher = new Fetcher();
+      $content = $fetcher->get("http://weixin.test.51jk.com/");
+      echo $content;
+      exit;
       // 测试 worker 
       // $w = new Worker();
       // $w->count = 8;
