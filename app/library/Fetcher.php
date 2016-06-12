@@ -125,10 +125,12 @@ class Fetcher{
 	 */
 	private function getfilename($url){
 		$filename = CACHE_PATH . "/debug/". SecurityUtil::hash($url) .".html";
+		
 		if(file_exists($filename)){
 			$this->content = file_get_contents($filename);
 		}else{
 			$this->content = $this->http->execute();
+			file_put_contents($filename,$this->content);
 		}
 	}
 
