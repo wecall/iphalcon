@@ -13,10 +13,9 @@ class PageUtil
      * @param $current_page 当前页号
      * @param $page_limit  一页显示的条数
      * @param $total_items 总条数
-     * @param $type 输出类型 1=数组 2=对象
      * @return PageUtil
      */
-    public static function getPageData($current_page = 1, $page_limit = 10, $total_items, $type = 1)
+    public static function getPageData($current_page = 1, $page_limit = 10, $total_items)
     {
         $page_data = array();
         $page_data['current'] = $current_page;
@@ -50,16 +49,6 @@ class PageUtil
             }
         }
         $page_data['next'] = $nextPage;//下一页号
-
-        //转换为对象形式，兼容之前的写法
-        if ($type == 2) {
-            $obj = new \stdClass();
-            foreach ($page_data as $key => $val) {
-                $obj->$key = $val;
-            }
-
-            return $obj;
-        }
 
         return $page_data;
     }

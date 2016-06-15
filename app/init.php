@@ -148,7 +148,7 @@ function config($key = null, $default = null)
     static $arrConfig;
     $internal_config_path = realpath(dirname(__FILE__) . '/../app/config');
     $external_config_path = realpath(CONFIG_PATH);
-
+    
     $value = ArrUtil::get($arrConfig, $key, $default);
     if ($arrConfig && $value) {
         return $value;
