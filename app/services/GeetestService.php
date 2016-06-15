@@ -14,7 +14,8 @@ class GeetestService {
     private $response;
 
     public function __construct() {
-        $config_gee = config("common.geetest");
+        $config_gee = config('common.geetest');
+        
         $this->captcha_id  = $config_gee["captcha_id"];
         $this->private_key = $config_gee["private_key"];
     }
