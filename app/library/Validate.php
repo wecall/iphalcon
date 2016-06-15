@@ -1,14 +1,12 @@
 <?php
-/**
- * @Author: Ron Chen
- * @Date:   2015-06-18 17:29:54
- * @Last Modified by:   Ron Chen
- * @Last Modified time: 2016-03-09 13:19:44
- * @Last Modified by:   as
- * @Last Modified time: 2015-09-24 14:27:02
- */
 
-//正则验证数据正确性
+/**
+ * 正则验证数据正确性 操作类
+ * 
+ * @author ron_chen<ron_chen@hotmail.com>
+ * @copyright ron_chen<ron_chen@hotmail.com>
+ * @link http://www.ronchen.me/
+ */
 class Validate {
 	
 	public static function cleanNonUnicodeSupport($pattern) {

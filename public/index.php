@@ -12,6 +12,8 @@ define('APP_PATH', BASE_PATH . '/app');
 define('LOGS_PATH', APP_PATH . '/logs');
 
 define('CONFIG_PATH', APP_PATH . '/config');
+// 定义资源文件的访问地址
+define('PUBLIC_PATH', BASE_PATH . '/public/');
 
 define('CACHE_PATH', BASE_PATH . '/public/cache/');
 // 定义远程获取图片的存储路径
