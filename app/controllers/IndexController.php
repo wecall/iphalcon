@@ -12,11 +12,12 @@ class IndexController extends Controller{
 
       // 测试
       $GtSdk = new GeetestService();
-      session_start();
+      
       $user_id = "test";
       $status = $GtSdk->pre_process($user_id);
-      $_SESSION['gtserver'] = $status;
-      $_SESSION['user_id'] = $user_id;
+
+      $this->session->set("gtserver", $status);
+      $this->session->set("user_id", $user_id);
       echo $GtSdk->get_response_str();
 
       // $user_id = $_SESSION['user_id'];
