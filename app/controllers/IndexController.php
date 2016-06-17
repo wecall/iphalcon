@@ -12,7 +12,7 @@ class IndexController extends Controller{
     	$xhprofService = new XhprofService();
     	$xhprofService->beginDebug();
     	$this->testXhprof();
-    	var_dump($xhprofService->endDebug());
+    	$xhprofService->endDebug(true);
     	exit;
     }
 
