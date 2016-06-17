@@ -12,7 +12,8 @@ class IndexController extends Controller{
     	$xhprofService = new XhprofService();
     	$xhprofService->beginDebug();
     	$this->testXhprof();
-    	$xhprofService->endDebug(true);
+    	$xhprofService->endDebug();
+    	var_dump($xhprofService->getRunId());
     	exit;
     }
 
