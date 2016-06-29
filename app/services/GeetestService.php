@@ -1,9 +1,11 @@
 <?php
-
 /**
- * 极验行为式验证安全平台，php 网站主后台包含的库文件
+ * 极验行为式验证安全平台 操作类
  *
- * @author Tanxu
+ *
+ * @author ron_chen<ron_chen@hotmail.com>
+ * @copyright ron_chen<ron_chen@hotmail.com>
+ * @link http://www.ronchen.me/
  */
 class GeetestService {
     const GT_SDK_VERSION = 'php_3.2.0';

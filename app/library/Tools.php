@@ -1,10 +1,12 @@
 <?php
+
 /**
- * @name Tools 工具类
- * @desc 常用的字符操作，日期操作 ULR操作等等
- * @author ron chen
- * @date 2014-12-01
-*/
+ * 常用的字符操作，日期操作 ULR操作等等 操作类
+ * 
+ * @author ron_chen<ron_chen@hotmail.com>
+ * @copyright ron_chen<ron_chen@hotmail.com>
+ * @link http://www.ronchen.me/
+ */
 class Tools {
 	
 	public static function cleanNonUnicodeSupport($pattern) {

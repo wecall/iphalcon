@@ -3,8 +3,6 @@
 use Phalcon\Mvc\View;
 use Phalcon\Loader as Loader;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Cache\Backend\File as CacheFile;
 /**
 * Phalcon 的初始化文件
 */
@@ -16,10 +14,12 @@ class init
             APP_PATH . '/controllers',
             APP_PATH . '/models',
             APP_PATH . '/consts',
+            APP_PATH . '/exceptions',
+            APP_PATH . '/responses',
             APP_PATH . '/services',
+            APP_PATH . '/router',
             APP_PATH . '/utils',
             APP_PATH . '/tasks',
-            APP_PATH . '/logs',
             APP_PATH . '/library',
         ))->register();
     }
@@ -57,25 +57,7 @@ class init
         $loader = new Loader();
         $loader->registerNamespaces($namespaces)->register();
     }
-
     
-    public function loadRouter() {
-        $config = config("router");
-        $this->di->set('router', function () use ($config) {
-            $router = new \Phalcon\Mvc\Router(false); //不使用框架自带默认路由
-            foreach ($config as $key => $value) {
-                if($key == 'default') {
-                    $router->setDefaults($value['path']);
-                }else if($key == 'notfound'){
-                    $router->notFound((array)$value['path']);
-                }else{
-                    $router->add($value['mapping'], $value['path']);
-                }
-            }
-            return $router;
-        });
-    }
-
     public function loadSession() {
         $config = config("common");
         $this->di->setShared('session', function () use ($config) {
@@ -105,32 +87,9 @@ class init
         });
     }
 
-    public function loadViewCache() {
-        $this ->di ->set('viewCache', function() {
-            $frontCache = new Output(['lifetime' => constant('CACHE_TIME')]);
-            $cache = new CacheFile($frontCache, [
-                'cacheDir' => CACHE_PATH 
-            ]);
-            return $cache;
-        });
-    }
-
-    public function loadView(){
-        $this->di->set('view', function (){
-            $view = new View();
-            $view->setViewsDir(APP_PATH.'/views/');
-            $view->registerEngines(array(
-                '.html' => function ($view, $di) {
-                        $volt = new VoltEngine($view, $di);
-                        $volt->setOptions(array(
-                            'compiledPath' => CACHE_PATH,
-                            'compiledSeparator' => '_',
-                            'compiledExtension' => '.php'
-                        ));
-                        return $volt;
-                    }
-            ));
-            return $view;
+    public function loadCollections(){
+        $this->di->set('collections', function () {
+            return include(dirname(__FILE__) . '/router/routerLoader.php');
         });
     }
 
@@ -179,6 +138,20 @@ function config($key = null, $default = null)
     return ArrUtil::get($arrConfig, $key, $default);
 }
 
+/**
+ * @param null $beanName
+ * @param null $parameters
+ * @return mixed|\Phalcon\DiInterface
+ */
+function getDI($beanName = null, $parameters = null)
+{
+    $di = \Phalcon\DI::getDefault();
+    if (!$beanName) {
+        return $di;
+    }
+
+    return $di->get($beanName, $parameters);
+}
 
 function getClientIp()
 {

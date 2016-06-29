@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Redis 操作类
+ *
+ *
+ * @author ron_chen<ron_chen@hotmail.com>
+ * @copyright ron_chen<ron_chen@hotmail.com>
+ * @link http://www.ronchen.me/
+ */
 class RedisService{
 
 	private $redis;
