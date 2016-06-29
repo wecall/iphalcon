@@ -1,6 +1,7 @@
 <?php
 return call_user_func(function(){
     $collections = array();
+    
     $collectionFiles = scandir(dirname(__FILE__) . '/collections');
     foreach($collectionFiles as $collectionFile){
         $pathinfo = pathinfo($collectionFile);
@@ -8,7 +9,7 @@ return call_user_func(function(){
         if($pathinfo['extension'] === 'php'){
             // The collection files return their collection objects, so mount
             // them directly into the router.
-            $collections[] = include(dirname(__FILE__) .'/collections/' . $collectionFile);
+            $collections[] = include_once(dirname(__FILE__) .'/collections/' . $collectionFile);
         }
     }
     return $collections;

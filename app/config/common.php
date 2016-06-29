@@ -6,6 +6,7 @@ $config = array(
 	"geetest"      => array(
 		"captcha_id"  => "4b05a5bc8e547bfba4152080e81b326e",
 		"private_key" => "bc1a648ba9d8c175821331650ea84632"
-	)
+	),
+	"isDebug"	   => true
 );
 return $config;
