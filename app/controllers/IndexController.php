@@ -9,12 +9,12 @@ class IndexController extends Controller{
     }
 
     public function indexAction(){ 
-    	$xhprofService = new XhprofService();
-    	$xhprofService->beginDebug();
-    	$this->testXhprof();
-    	$xhprofService->endDebug();
-    	var_dump($xhprofService->getRunId());
-    	exit;
+    	// $xhprofService = new XhprofService();
+    	// $xhprofService->beginDebug();
+    	// $this->testXhprof();
+    	// $xhprofService->endDebug();
+    	// var_dump($xhprofService->getRunId());
+    	// exit;
     }
 
 
