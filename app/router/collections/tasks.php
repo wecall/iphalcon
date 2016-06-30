@@ -5,7 +5,7 @@ return call_user_func(function () {
     $c->setHandler('TasksController', true);
     $c->setPrefix('/task');
     // 
-    $c->get('/task', 'index');
+    $c->get('/', 'index');
 
     return $c;
 });
