@@ -2,24 +2,23 @@
 
 use Phalcon\Mvc\Controller;
 
+use business\website\BDianping as BDianping;
+
 class IndexController extends Controller{
 
     public function initialize(){
        
     }
 
-    public function indexAction(){ 
-    	// $xhprofService = new XhprofService();
-    	// $xhprofService->beginDebug();
-    	// $this->testXhprof();
-    	// $xhprofService->endDebug();
-    	// var_dump($xhprofService->getRunId());
-    	// exit;
+    public function index(){ 
+    	
+        $dp = new BDianping();
+        return ["2"];
     }
 
 
     public function testXhprof(){
-    	$arr = ["123","456","582","251"];
+    	$arr = ["1","3","2","1"];
     	sort($arr);
     }
 

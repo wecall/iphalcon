@@ -23,7 +23,7 @@ class APP extends init
         $this->loadRedis();
         $this->loadCrypt();
         $this->loadSession();
-        // $this->loadNameSpaces();
+        $this->loadNameSpaces();
         
         $app = new \Phalcon\Mvc\Micro($this->di);
         /**

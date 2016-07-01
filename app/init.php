@@ -21,6 +21,8 @@ class init
             APP_PATH . '/utils',
             APP_PATH . '/tasks',
             APP_PATH . '/library',
+            APP_PATH . '/interface',
+            APP_PATH . '/business',
         ))->register();
     }
 
@@ -54,6 +56,7 @@ class init
 
     public function loadNameSpaces() {
         $namespaces = config("namespaces");
+       
         $loader = new Loader();
         $loader->registerNamespaces($namespaces)->register();
     }
