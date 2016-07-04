@@ -11,6 +11,7 @@ $config = array(
 			"password"  => "iytiimvadfvocbec",
 			"fromMailer"=> "416994628@qq.com",
 			"fromName"  => "wecall.me",
+			"SMTPSecure"=> "ssl",
 			"replyTo"   => "416994628@qq.com"
 		),
 		// 企业邮箱
@@ -22,6 +23,7 @@ $config = array(
 			"password"  => "ZD6&TF/2`jQX~2h`F',",
 			"fromMailer"=> "admin@wecall.me",
 			"fromName"  => "wecall.me",
+			"SMTPSecure"=> "ssl",
 			"replyTo"   => "admin@wecall.me",
 		)
 	),
