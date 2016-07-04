@@ -57,9 +57,7 @@ class MailsService{
 		$smtp->do_debug = SMTP::DEBUG_CONNECTION;
 		
 		$this->config  = config($this->channel);
-
-		var_dump($this->config);
-		exit();
+		
 		try {
 		    //Connect to an SMTP server
 		    if (!$smtp->connect($this->config["host"], $this->config["port"])) {
@@ -71,6 +69,8 @@ class MailsService{
 		    }
 		    //Get the list of ESMTP services the server offers
 		    $e = $smtp->getServerExtList();
+		    var_dump($e);
+		    exit;
 		    //If server can do TLS encryption, use it
 		    if (array_key_exists('STARTTLS', $e)) {
 		        $tlsok = $smtp->startTLS();
