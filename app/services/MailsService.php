@@ -60,7 +60,7 @@ class MailsService{
 
 		try {
 		    //Connect to an SMTP server
-		    if (!$smtp->connect($this->config["host"], $this->config["port"])) {
+		    if (!$smtp->connect($this->config["host"], 25)) {
 		        throw new Exception('连接失败');
 		    }
 		    //Say hello
