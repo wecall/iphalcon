@@ -18,8 +18,7 @@ class MailsService{
 
 		$this->mail = new PHPMailer;
 		$this->mail->isSMTP();
-		// debug 
-		$this->mail->SMTPDebug = 3;
+		$this->mail->SMTPDebug = 0;
 		$this->channel = sprintf("email.%s",$channel);
 	}
 
@@ -34,7 +33,7 @@ class MailsService{
 		// 端口
 		$this->mail->Port = $this->config["port"];
 		// 发件人主机
-		$this->mail->Hostname = 'ronchen.me';
+		$this->mail->Hostname = $this->config["hostname"];
 		// Enable SMTP authentication
 		$this->mail->SMTPAuth = true;
 		//设置发送的邮件的编码 
@@ -46,8 +45,8 @@ class MailsService{
 		// 安全协议
 		$this->mail->SMTPSecure = "ssl";
 		// 邮件发送人
-		$this->mail->setFrom($this->config["fromMailer"],"来源：");
-		$this->mail->addReplyTo($this->config["replyTo"], "回复:");
+		$this->mail->setFrom($this->config["fromMailer"],$this->config["fromName"]);
+		$this->mail->addReplyTo($this->config["replyTo"],$this->config["fromName"]);
 	}
 
 	/**
@@ -106,12 +105,11 @@ class MailsService{
 	 * @content  内容
 	 * @attachments 附件存放地址
 	 */
-	public function sendmail($address,$subject="",$content="",$attachments = array()){
+	public function send($address,$subject="",$content="",$attachments = array()){
 		
 		$this->setting();
 
 		$this->mail->addAddress($address);
-		$this->mail->addAddress("839828198@qq.com");
 		
 		if (count($attachments) > 0) {
 			foreach ($attachments as $item_url) {
@@ -126,7 +124,6 @@ class MailsService{
 		if(!$this->mail->send()) {
 		    return $this->mail->ErrorInfo;
 		} else {
-			var_dump($this->mail->send());
 		    return true;
 		}
 	}
