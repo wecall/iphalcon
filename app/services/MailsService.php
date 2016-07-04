@@ -72,10 +72,12 @@ class MailsService{
 		$this->mail->Subject = $subject;
 		$this->mail->Body    = $content;
 		$this->mail->AltBody = $subject;
-
+		
+		
 		if(!$this->mail->send()) {
 		    return $this->mail->ErrorInfo;
 		} else {
+			var_dump($this->mail->send());
 		    return true;
 		}
 	}
