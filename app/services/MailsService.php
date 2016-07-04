@@ -43,7 +43,9 @@ class MailsService{
 		// 邮件服务器密码
 		$this->mail->Password = $this->config["password"];
 		// 安全协议
-		$this->mail->SMTPSecure = isset($this->config["SMTPSecure"]) ? $this->config["SMTPSecure"] : "tls";
+		if (isset($this->config["SMTPSecure"])) {
+			$this->mail->SMTPSecure = $this->config["SMTPSecure"];
+		}
 		// 邮件发送人
 		$this->mail->setFrom($this->config["fromMailer"],$this->config["fromName"]);
 		$this->mail->addReplyTo($this->config["replyTo"],$this->config["fromName"]);
