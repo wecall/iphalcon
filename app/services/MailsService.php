@@ -69,8 +69,7 @@ class MailsService{
 		    }
 		    //Get the list of ESMTP services the server offers
 		    $e = $smtp->getServerExtList();
-		    var_dump($e);
-		    exit;
+		    
 		    //If server can do TLS encryption, use it
 		    if (array_key_exists('STARTTLS', $e)) {
 		        $tlsok = $smtp->startTLS();

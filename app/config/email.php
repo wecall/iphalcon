@@ -4,7 +4,7 @@ $config['qq'] = array(
 	// 个人邮箱
 	"email"  => array(
 		"host" 		=> "smtp.qq.com",
-		"port" 		=> "465",
+		"port" 		=> "25",
 		"username" 	=> "wecall@ronchen.me",
 		"password"  => "iytiimvadfvocbec",
 		"fromMailer"=> "416994628@qq.com",
