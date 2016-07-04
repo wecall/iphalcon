@@ -17,8 +17,8 @@ class MailsService{
 		require_once(APP_PATH."/services/PHPMailer/PHPMailerAutoload.php");
 
 		$this->mail = new PHPMailer;
-		// debug 
-		$this->mail->SMTPDebug = 3;
+		$this->mail->isSMTP();
+		$this->mail->SMTPDebug = 0;
 		$this->channel = sprintf("email.%s",$channel);
 	}
 
@@ -33,7 +33,7 @@ class MailsService{
 		// 端口
 		$this->mail->Port = $this->config["port"];
 		// 发件人主机
-		$this->mail->Hostname = 'ronchen.me';
+		$this->mail->Hostname = $this->config["hostname"];
 		// Enable SMTP authentication
 		$this->mail->SMTPAuth = true;
 		//设置发送的邮件的编码 
@@ -43,10 +43,61 @@ class MailsService{
 		// 邮件服务器密码
 		$this->mail->Password = $this->config["password"];
 		// 安全协议
-		$this->mail->SMTPSecure = "ssl";
+		if (isset($this->config["SMTPSecure"])) {
+			$this->mail->SMTPSecure = $this->config["SMTPSecure"];
+		}
 		// 邮件发送人
-		$this->mail->setFrom($this->config["fromMailer"],"来源：");
-		$this->mail->addReplyTo($this->config["replyTo"], "回复:");
+		$this->mail->setFrom($this->config["fromMailer"],$this->config["fromName"]);
+		$this->mail->addReplyTo($this->config["replyTo"],$this->config["fromName"]);
+	}
+
+	/**
+	 * 检测当前SMTP是否可用
+	 */
+	public function checkSmtp(){
+		$smtp = new SMTP;
+		$smtp->do_debug = SMTP::DEBUG_CONNECTION;
+		
+		$this->config  = config($this->channel);
+
+		try {
+		    //Connect to an SMTP server
+		    if (!$smtp->connect($this->config["host"], 25)) {
+		        throw new Exception('连接失败');
+		    }
+		    //Say hello
+		    if (!$smtp->hello(gethostname())) {
+		        throw new Exception('握手失败:' . $smtp->getError()['error']);
+		    }
+		    //Get the list of ESMTP services the server offers
+		    $e = $smtp->getServerExtList();
+		    
+		    //If server can do TLS encryption, use it
+		    if (array_key_exists('STARTTLS', $e)) {
+		        $tlsok = $smtp->startTLS();
+		        if (!$tlsok) {
+		            throw new Exception('Failed to start encryption: ' . $smtp->getError()['error']);
+		        }
+		        //Repeat EHLO after STARTTLS
+		        if (!$smtp->hello(gethostname())) {
+		            throw new Exception('EHLO (2) failed: ' . $smtp->getError()['error']);
+		        }
+		        //Get new capabilities list, which will usually now include AUTH if it didn't before
+		        $e = $smtp->getServerExtList();
+		    }
+		    //If server supports authentication, do it (even if no encryption)
+		    if (array_key_exists('AUTH', $e)) {
+		        if ($smtp->authenticate($this->config["username"], $this->config["password"])) {
+		            echo "连接成功";
+		        } else {
+		            throw new Exception('验证失败:' . $smtp->getError()['error']);
+		        }
+		    }
+		} catch (Exception $e) {
+		    echo '发送邮件服务器初始化失败: ' . $e->getMessage(), "\n";
+		}
+		//Whatever happened, close the connection.
+		$smtp->quit(true);
 	}
 
 	/**
@@ -56,12 +107,11 @@ class MailsService{
 	 * @content  内容
 	 * @attachments 附件存放地址
 	 */
-	public function sendmail($address,$subject="",$content="",$attachments = array()){
+	public function send($address,$subject="",$content="",$attachments = array()){
 		
 		$this->setting();
 
 		$this->mail->addAddress($address);
-		$this->mail->addAddress("839828198@qq.com");
 		
 		if (count($attachments) > 0) {
 			foreach ($attachments as $item_url) {
