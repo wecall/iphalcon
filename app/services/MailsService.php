@@ -17,6 +17,7 @@ class MailsService{
 		require_once(APP_PATH."/services/PHPMailer/PHPMailerAutoload.php");
 
 		$this->mail = new PHPMailer;
+		$this->isSMTP();
 		// debug 
 		$this->mail->SMTPDebug = 3;
 		$this->channel = sprintf("email.%s",$channel);
