@@ -57,10 +57,10 @@ class MailsService{
 		$smtp->do_debug = SMTP::DEBUG_CONNECTION;
 		
 		$this->config  = config($this->channel);
-		
+
 		try {
 		    //Connect to an SMTP server
-		    if (!$smtp->connect($this->config["host"], $this->config["port"])) {
+		    if (!$smtp->connect($this->config["host"], '25')) {
 		        throw new Exception('连接失败');
 		    }
 		    //Say hello
