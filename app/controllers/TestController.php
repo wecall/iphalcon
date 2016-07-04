@@ -115,6 +115,9 @@ class TestController extends Controller{
             // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
             
             $mail = new MailsService("163.email");
+            // 检测连接服务
+            $mail->checkSmtp();
+            exit;
             var_dump($mail->send("416994628@qq.com","测试邮件地址","<b>文本测试</b>"));
             exit;
       }
