@@ -1312,10 +1312,6 @@ class PHPMailer
     public function postSend()
     {
         try {
-            echo "*************";
-            echo $this->Mailer;
-            echo "*************";
-            exit();
             // Choose the mailer and send through it
             switch ($this->Mailer) {
                 case 'sendmail':
