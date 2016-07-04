@@ -58,6 +58,8 @@ class MailsService{
 		
 		$this->config  = config($this->channel);
 
+		var_dump($this->config);
+		exit();
 		try {
 		    //Connect to an SMTP server
 		    if (!$smtp->connect($this->config["host"], $this->config["port"])) {
