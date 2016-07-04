@@ -7,6 +7,7 @@
 	* Mongodb
 	* Redis
 	* Curl   RollingCurl
+	* Xhprof PHP性能分析工具
 
 2. 使用的第三方库
 

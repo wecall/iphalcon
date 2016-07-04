@@ -31,7 +31,7 @@ class SecurityUtil
         }
 
         for ($i = 0, $passwd = ''; $i < $length; $i++)
-            $passwd .= Tools::substr($str, mt_rand(0, Tools::strlen($str) - 1), 1);
+            $passwd .= substr($str, mt_rand(0, strlen($str) - 1), 1);
 
         return $passwd;
     }

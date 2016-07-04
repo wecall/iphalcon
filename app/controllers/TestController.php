@@ -6,6 +6,28 @@ class TestController extends Controller{
 
       // 常用方法
       public function indexAction(){
+            // session_start();
+            // header("content-type:image/png");    //设置创建图像的格式
+            // $image_width=70;                      //设置图像宽度
+            // $image_height=18;                     //设置图像高度
+            // srand(microtime()*100000);          //设置随机数的种子
+            // for($i=0;$i<4;$i++){                  //循环输出一个4位的随机数
+            //    $new_number.=dechex(rand(0,15));
+            // }
+            // $_SESSION["check_checks"]=$new_number;    //将获取的随机数验证码写入到SESSION变量中     
+
+            // $num_image=imagecreate($image_width,$image_height);  //创建一个画布
+            // imagecolorallocate($num_image,255,50,255);     //设置画布的颜色
+            // for($i=0;$i<strlen($_SESSION["check_checks"]);$i++){  //循环读取SESSION变量中的验证码
+            //    $font=mt_rand(3,5);                              //设置随机的字体
+            //    $x=mt_rand(1,8)+$image_width*$i/4;               //设置随机字符所在位置的X坐标
+            //    $y=mt_rand(1,$image_height/4);                   //设置随机字符所在位置的Y坐标
+            //    $color=imagecolorallocate($num_image,mt_rand(0,100),mt_rand(0,150),mt_rand(0,200));      //设置字符的颜色
+            //    imagestring($num_image,$font,$x,$y,$_SESSION["check_checks"][$i],$color);      //水平输出字符
+            // }
+            // imagepng($num_image);       //生成PNG格式的图像
+            // imagedestroy($num_image);   //释放图像资源
+            // exit;
             // 测试 Fetcher
             // $fetcher = new Fetcher();
             // $content = $fetcher->get("http://weixin.test.51jk.com/");
@@ -90,10 +112,22 @@ class TestController extends Controller{
                 // var_dump($mongodb->count());
                 // exit;
 
-            // // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
-            // $mail = new MailsService("qq.email");
-            // var_dump($mail->sendmail("416994628@163.com","测试邮件地址","<b>文本测试</b>"));
+            // 邮件服务测试      ----------------------------  显示成功但是没有收到邮件问题
+            
+            $mail = new MailsService("163.email");
+            // 检测连接服务
+            // $mail->checkSmtp();
             // exit;
+            var_dump($mail->send("416994628@qq.com","AAAAAAAAAAAA","<b>test cone</b>"));
+
+            $mail2 = new MailsService("qq.email");
+            var_dump($mail2->send("416994628@163.com","AAAAAAAAAAAA","<b>test cone</b>"));
+
+            exit;
+      }
+
+      public function codeAction(){
+        exit(CaptchaService::build(6));
       }
 
       // 极验验证码登录
