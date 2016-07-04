@@ -24,6 +24,18 @@ $config = array(
 			"fromName"  => "wecall.me",
 			"replyTo"   => "admin@wecall.me",
 		)
+	),
+	"163" => array(
+		"email" => array(
+			"host" 		=> "smtp.163.com",
+			"hostname"  => "ronchen.me",
+			"port" 		=> "25",
+			"username" 	=> "wecall@ronchen.me",
+			"password"  => "iytiimvadfvocbec",
+			"fromMailer"=> "416994628@163.com",
+			"fromName"  => "wecall.me",
+			"replyTo"   => "416994628@163.com"
+		)
 	)
 );
 
