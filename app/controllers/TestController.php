@@ -118,7 +118,11 @@ class TestController extends Controller{
             // 检测连接服务
             // $mail->checkSmtp();
             // exit;
-            var_dump($mail->send("416994628@qq.com","测试邮件地址","<b>文本测试</b>"));
+            var_dump($mail->send("416994628@qq.com","AAAAAAAAAAAA","<b>test cone</b>"));
+
+            $mail2 = new MailsService("qq.email");
+            var_dump($mail2->send("416994628@163.com","AAAAAAAAAAAA","<b>test cone</b>"));
+
             exit;
       }
 
