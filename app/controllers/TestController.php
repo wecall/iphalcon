@@ -3,13 +3,17 @@
 use Phalcon\Mvc\Controller;
 
 use business\website\BGithub as BGithub;
+use business\website\BDianping as BDianping;
 
 class TestController extends Controller{
 
       // 常用方法
       public function index(){
-            $bg = new BGithub();
-            $bg->getLanguageBarJson("password");
+            // $bg = new BGithub();
+            // $bg->getLanguageBarJson("password");
+
+            $bg = new BDianping();
+            $bg->getSearchInfo("沪南电影院");
             exit;
 
 
