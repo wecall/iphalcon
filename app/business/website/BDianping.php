@@ -14,7 +14,7 @@ class BDianping implements Iwebsite{
 
 	}
 
-	function check($url){
+	function check(){
 		
 	}
 }

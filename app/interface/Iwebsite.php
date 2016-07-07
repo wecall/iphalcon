@@ -7,6 +7,6 @@ interface Iwebsite{
 	/**
 	 * 检查网站版本是否更新
 	 */
-    public function check($weburl);
+    public function check();
     
 }
