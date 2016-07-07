@@ -7,6 +7,9 @@
  * @copyright ron_chen<ron_chen@hotmail.com>
  * @link http://www.ronchen.me/
  */
+
+namespace services;
+
 class GeetestService {
     const GT_SDK_VERSION = 'php_3.2.0';
 

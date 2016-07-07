@@ -18,12 +18,15 @@ define('DOMDOCUMENT', 'DOMDocument');
 define('DOMELEMENT', 'DOMElement');
 define('DOMNODELIST', 'DOMNodeList');
 define('DOMNODE', 'DOMNode');
+
 require_once(dirname(__FILE__).'/PHPQuery/DOMEvent.php');
 require_once(dirname(__FILE__).'/PHPQuery/DOMDocumentWrapper.php');
 require_once(dirname(__FILE__).'/PHPQuery/phpQueryEvents.php');
 require_once(dirname(__FILE__).'/PHPQuery/Callback.php');
 require_once(dirname(__FILE__).'/PHPQuery/phpQueryObject.php');
 require_once(dirname(__FILE__).'/PHPQuery/compat/mbstring.php');
+
+
 /**
  * Static namespace for phpQuery functions.
  *
@@ -46,8 +49,7 @@ abstract class phpQuery {
 	 *
 	 * @var unknown_type
 	 */
-	public static $defaultDoctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">';
+	public static $defaultDoctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 	public static $defaultCharset = 'UTF-8';
 	/**
 	 * Static namespace for plugins.

@@ -7,6 +7,9 @@
  * @copyright ron_chen<ron_chen@hotmail.com>
  * @link http://www.ronchen.me/
  */
+
+namespace services;
+
 class LogsService{
 
     private static function setBasePath(){

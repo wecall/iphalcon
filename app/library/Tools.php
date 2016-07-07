@@ -7,6 +7,7 @@
  * @copyright ron_chen<ron_chen@hotmail.com>
  * @link http://www.ronchen.me/
  */
+
 class Tools {
 	
 	public static function cleanNonUnicodeSupport($pattern) {

@@ -2,10 +2,17 @@
 
 use Phalcon\Mvc\Controller;
 
+use business\website\BGithub as BGithub;
+
 class TestController extends Controller{
 
       // 常用方法
-      public function indexAction(){
+      public function index(){
+            $bg = new BGithub();
+            $bg->getLanguageBarJson("password");
+            exit;
+
+
             // session_start();
             // header("content-type:image/png");    //设置创建图像的格式
             // $image_width=70;                      //设置图像宽度
@@ -118,12 +125,12 @@ class TestController extends Controller{
             // exit;
       }
 
-      public function codeAction(){
+      public function code(){
         exit(CaptchaService::build(6));
       }
 
       // 极验验证码登录
-      public function verifyAction(){
+      public function verify(){
             // 测试
             $GtSdk = new GeetestService();
 
@@ -135,7 +142,7 @@ class TestController extends Controller{
             echo $GtSdk->get_response_str();
       }
 
-      public function checkAction(){
+      public function check(){
             $GtSdk = new GeetestService();
             $user_id = $this->session->get("user_id");
             if ($this->session->get("gtserver") == 1) {

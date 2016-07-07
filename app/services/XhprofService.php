@@ -11,6 +11,8 @@
  * @link http://www.ronchen.me/
  */
 
+namespace services;
+
 class XhprofService{
 	
 	private $dir;
