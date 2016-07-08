@@ -103,7 +103,7 @@ class APP extends init
                 $response->setJsonContent($returnArr);
                 $response->send();
                 
-                LogsService::error($exception->getMessage(),array(),"Exception");
+                \services\LogsService::error($exception->getMessage(),array(),"Exception");
             }
         });
 

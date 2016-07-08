@@ -9,12 +9,18 @@ class TestController extends Controller{
 
       // 常用方法
       public function index(){
+            $bank = Bank::findFirst(['conditions' => 'id = ?1', 'bind' => [1 => "3"]]);
+            if (!$bank) {
+                  throw new HTTPException(ErrorCodeConsts::ERROR_CODE_BANK_NOT_EXIST);
+            }
+            print_r($bank);
+            exit();
             // $bg = new BGithub();
             // $bg->getLanguageBarJson("password");
 
-            $bg = new BDianping();
-            $bg->getSearchInfo("沪南电影院");
-            exit;
+            // $bg = new BDianping();
+            // $bg->getSearchInfo("沪南电影院");
+            // exit;
 
 
             // session_start();
