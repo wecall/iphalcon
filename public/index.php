@@ -21,4 +21,6 @@ define('IMG_PATH', BASE_PATH . '/public/upload/original/');
 
 define('CACHE_TIME', 0);
 
+define('WEB_MODE', "develop");
+
 require_once APP_PATH . '/app.php';

@@ -14,11 +14,19 @@ class WechatController extends BaseController{
 	public function onConstruct(){
 		$common = config("common");
 
+		
+		$configWechat = $common["wechat"];
+		if (WEB_MODE == 'develop') {
+			$configWechat = $configWechat["develop"];
+		}else{
+			$configWechat = $configWechat["product"];
+		}
+
 		// 初始化身份验证
 		$this->wechat = new WeiXin(
-			$common["wechat"]["develop"]["token"],
-			$common["wechat"]["develop"]["appid"],
-			$common["wechat"]["develop"]["appsecret"]);
+			$configWechat["token"],
+			$configWechat["appid"],
+			$configWechat["appsecret"]);
 		
 		$this->mongo  = new MongoClient($common["mongodb"]);
 
@@ -31,7 +39,7 @@ class WechatController extends BaseController{
 	}
 
 
-	public function indexAction(){
+	public function index(){
 		
 		// 创建菜单
 		$this->createMenu();
@@ -47,8 +55,6 @@ class WechatController extends BaseController{
 
 	// 新增临时素材
 	public function mediaUploadAction(){
-
-		Yaf_Dispatcher::getInstance ()->disableView();
 		$result = array();
 		// 添加素材管理
 		if ($_FILES["media"]["error"] > 0){
