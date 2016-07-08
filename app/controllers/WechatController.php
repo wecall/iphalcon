@@ -7,15 +7,13 @@
  */
 
 class WechatController extends BaseController{
-	public $param;
+	public $param = array();
 	public $wechat;
 	public $mongo; 
 
 	public function onConstruct(){
-		$common = config("common");
+		$configWechat = config("common.wechat");
 
-		
-		$configWechat = $common["wechat"];
 		if (WEB_MODE == 'develop') {
 			$configWechat = $configWechat["develop"];
 		}else{
@@ -23,15 +21,12 @@ class WechatController extends BaseController{
 		}
 
 		// 初始化身份验证
-		$this->wechat = new WeiXin(
+		$this->wechat = new \services\WechatService(
 			$configWechat["token"],
 			$configWechat["appid"],
 			$configWechat["appsecret"]);
 		
-		$this->mongo  = new MongoClient($common["mongodb"]);
-
-		$this->param = array();
-		$this->param += $this->params;
+		// $this->mongo  = new \MongoClient(config("mongodb.mongodb"));
 
 		$this->param["title"]  = "API微信管理平台";
 		$this->param["description"] = "API微信管理平台-公众号管理";
@@ -44,7 +39,7 @@ class WechatController extends BaseController{
 		// 创建菜单
 		$this->createMenu();
 		// 处理接收的消息
-		$this->receiveMessage();
+		// $this->receiveMessage();
 		// 处理回复消息
 	}
 
@@ -64,7 +59,7 @@ class WechatController extends BaseController{
 		}
 
 		$filename = $_FILES["media"]["name"];
-		$fileext  = strtolower(Tools::getFileExtension($filename));
+		$fileext  = strtolower(\Tools::getFileExtension($filename));
 	    $filesize = ($_FILES["media"]["size"] / 1024);
 
 	    $uploadpath = APP_PATH."/public/upload/wechat/";
@@ -105,7 +100,7 @@ class WechatController extends BaseController{
 						$result["msg"]  = "缩略图上传失败";
 						exit(json_encode($result));
 					}else{
-						$db_result_new = Tools::object_to_array($postValNew);
+						$db_result_new = \Tools::object_to_array($postValNew);
 						$db_result_new["is_temporary"] = 0;
 						$this->mongo->selectDB('imovie')->selectCollection('wx_media_upload')->insert($db_result_new);
 					}
@@ -150,7 +145,7 @@ class WechatController extends BaseController{
 		$result["msg"]  = "上传微信服务器成功";
 		
 		// 处理入库操作 is-temporary
-		$db_result = Tools::object_to_array($postVal);
+		$db_result = \Tools::object_to_array($postVal);
 		$db_result["is_temporary"] = 0;
 
 		// 数据插入
@@ -171,7 +166,7 @@ class WechatController extends BaseController{
 		}
 
 		$filename = $_FILES["media"]["name"];
-		$fileext  = strtolower(Tools::getFileExtension($filename));
+		$fileext  = strtolower(\Tools::getFileExtension($filename));
 	    $filesize = ($_FILES["media"]["size"] / 1024);
 
 	    $uploadpath = APP_PATH."/public/upload/wechat/image_text/";
@@ -232,7 +227,7 @@ class WechatController extends BaseController{
 		}
 
 		$filename = $_FILES["media"]["name"];
-		$fileext  = strtolower(Tools::getFileExtension($filename));
+		$fileext  = strtolower(\Tools::getFileExtension($filename));
 	    $filesize = ($_FILES["media"]["size"] / 1024);
 
 	    $uploadpath = APP_PATH."/public/upload/wechat/material/";
@@ -277,7 +272,7 @@ class WechatController extends BaseController{
 							$result["msg"]  = "缩略图上传失败";
 							exit(json_encode($result));
 						}else{
-							$db_result_new = Tools::object_to_array($postValNew);
+							$db_result_new = \Tools::object_to_array($postValNew);
 							$db_result_new["is_temporary"] = 2;
 							$db_result_new["type"]         = "thumb";
 							$db_result_new["created_at"]   = time();
@@ -331,7 +326,7 @@ class WechatController extends BaseController{
 
 		$result["code"] = "200";
 		$result["msg"]  = "上传微信服务器成功";
-		$db_result = Tools::object_to_array($postVal);
+		$db_result = \Tools::object_to_array($postVal);
 		$db_result["is_temporary"] = 2;
 		$db_result["type"]         = $str_type;
 		$db_result["created_at"]   = time();

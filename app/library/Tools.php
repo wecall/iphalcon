@@ -83,5 +83,122 @@ class Tools {
 		return preg_replace($pat,"",$descclear);
 	}
 
-	
+	/**
+	 * 获取文件扩展名
+	 *
+	 * @param $file
+	 *
+	 * @return mixed|string
+	 */
+	public static function getFileExtension($file) {
+		if (is_uploaded_file($file))
+		{
+			return "unknown";
+		}
+
+		return pathinfo($file, PATHINFO_EXTENSION);
+	}
+
+	/**
+	 * 将对象转化为数组
+	 * @param  [object] $obj [对象]
+	 * @return [array]      [数组]
+	 */
+	public static function object_to_array($obj) 
+	{ 
+	    $_arr= is_object($obj) ? get_object_vars($obj) : $obj; 
+	    foreach($_arr as $key=> $val) 
+	    { 
+	        $val= (is_array($val) || is_object($val)) ? object_to_array($val) : $val; 
+	        $arr[$key] = $val; 
+	    } 
+	    return $arr; 
+	}
+
+
+	/**
+	 * @param        $url
+	 * @param string $method
+	 * @param null   $postFields
+	 * @param null   $header
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
+	public static function curl($url, $method = 'GET', $postFields = null, $header = null) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+		curl_setopt($ch, CURLOPT_FAILONERROR, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+
+		if (strlen($url) > 5 && strtolower(substr($url, 0, 5)) == "https")
+		{
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		}
+
+		switch ($method)
+		{
+			case 'POST':
+				curl_setopt($ch, CURLOPT_POST, true);
+
+				if (!empty($postFields))
+				{
+					if (is_array($postFields) || is_object($postFields))
+					{
+						if (is_object($postFields))
+							$postFields = Tools::object2array($postFields);
+						$postBodyString = "";
+						$postMultipart = false;
+						foreach ($postFields as $k => $v)
+						{
+							if ("@" != substr($v, 0, 1))
+							{ //判断是不是文件上传
+								$postBodyString .= "$k=" . urlencode($v) . "&";
+							}
+							else
+							{ //文件上传用multipart/form-data，否则用www-form-urlencoded
+								$postMultipart = true;
+								$postFields[$k] = curl_file_create(substr($v, 1, strlen($v)));
+							}
+						}
+						unset($k, $v);
+						if ($postMultipart)
+						{
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+						}
+						else
+						{
+							curl_setopt($ch, CURLOPT_POSTFIELDS, substr($postBodyString, 0, -1));
+						}
+					}
+					else
+					{
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+					}
+
+				}
+				break;
+			default:
+				if (!empty($postFields) && is_array($postFields))
+					$url .= (strpos($url, '?') === false ? '?' : '&') . http_build_query($postFields);
+				break;
+		}
+		curl_setopt($ch, CURLOPT_URL, $url);
+
+		if (!empty($header) && is_array($header))
+		{
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		}
+		$response = curl_exec($ch);
+		if (curl_errno($ch))
+		{
+			throw new Exception(curl_error($ch), 0);
+		}
+		curl_close($ch);
+
+		return $response;
+	}
 }

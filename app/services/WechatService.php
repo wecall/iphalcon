@@ -237,7 +237,7 @@ class WechatService {
 	private function getAccessToken() {
 		if ($this->appid && $this->appsecret){
 			if ($this->valid <= time()){
-				$access = json_decode(Tools::curl("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$this->appid}&secret={$this->appsecret}"));
+				$access = json_decode(\Tools::curl("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$this->appid}&secret={$this->appsecret}"));
 				if (isset($access->access_token) && isset($access->expires_in)){
 					$this->access_token = $access->access_token;
 					$this->valid = time() + $access->expires_in;
@@ -260,7 +260,7 @@ class WechatService {
 		$ipList = array();
 
 		if (isset($access->access_token)) {
-			$access = json_decode(Tools::curl("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={$this->access_token}"));
+			$access = json_decode(\Tools::curl("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={$this->access_token}"));
 			if (isset($access->ip_list)){
 				$ipList = $access->ip_list;
 			}
@@ -592,7 +592,7 @@ class WechatService {
 		if (self::$debug)
 			Log::out("weixin_debug", 'I', "get:" . $link);
 
-		return json_decode(Tools::curl($link));
+		return json_decode(\Tools::curl($link));
 	}
 
 	/**
@@ -607,7 +607,7 @@ class WechatService {
 		if (self::$debug)
 			Log::out("weixin_debug", 'I', "post:", $link . ":" . serialize($data));
 
-		return json_decode(Tools::curl($link, 'POST', $data));
+		return json_decode(\Tools::curl($link, 'POST', $data));
 	}
 
 	/**
@@ -1200,7 +1200,7 @@ class WechatService {
 	public function mediaUpload($filetype, $filepath) {
 		if ($this->getAccessToken() && file_exists($filepath))
 		{
-			$fileext = strtolower(Tools::getFileExtension($filepath));
+			$fileext = strtolower(\Tools::getFileExtension($filepath));
 			$filesize = filesize($filepath);
 			switch ($filetype)
 			{
@@ -1253,7 +1253,7 @@ class WechatService {
 		if ($this->getAccessToken() && file_exists($filepath))
 		{
 			$media = array();
-			$fileext = strtolower(Tools::getFileExtension($filepath));
+			$fileext = strtolower(\Tools::getFileExtension($filepath));
 			$filesize = filesize($filepath);
 			switch ($filetype)
 			{
