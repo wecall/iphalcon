@@ -10,12 +10,17 @@
  */
 
 class Tools {
-	
-	public static function cleanNonUnicodeSupport($pattern) {
-		if (!defined('PREG_BAD_UTF8_OFFSET'))
-			return $pattern;
 
-		return preg_replace('/\\\[px]\{[a-z]\}{1,2}|(\/[a-z]*)u([a-z]*)$/i', "$1$2", $pattern);
+
+	
+	/**
+	 * 生成用户访问的token
+	 */
+	public static function buildToken(){
+		$chars = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789ABCDEFGHJKMNPQRSTUVWXYZ0123456789ABCDEFGHJKMNPQRSTUVWXYZ0123456789';
+        $chars = str_shuffle($chars);
+
+        return sha1(substr($chars,0,32));
 	}
 
 	/**
@@ -77,4 +82,6 @@ class Tools {
 		
 		return preg_replace($pat,"",$descclear);
 	}
+
+	
 }

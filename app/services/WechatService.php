@@ -1,10 +1,17 @@
 <?php
 
 /**
- * chenzhidong
- * 2013-6-6
+ * wechat 操作类
+ *
+ *
+ * @author ron_chen<ron_chen@hotmail.com>
+ * @copyright ron_chen<ron_chen@hotmail.com>
+ * @link http://www.ronchen.me/
  */
-class WeiXin {
+
+namespace services;
+
+class WechatService {
 	const MSG_TYPE_TEXT = 'text';
 	const MSG_TYPE_IMAGE = 'image';
 	const MSG_TYPE_VOICE = 'voice';
