@@ -19,44 +19,46 @@ class Bank extends AbstractModel{
      *
      * @var string
      */
-    public $updated_at;
+    public $ename;
+
+    /**
+     * @var integer
+     */
+    public $isValid;
+
 
     /**
      *
      * @var string
      */
-    public $created_at;
+    public $updatedTime;
 
     /**
-     * Returns table name mapped in the model.
      *
-     * @return string
+     * @var string
      */
-    public function getSource()
-    {
-        return 'bank';
+    public $createdTime;
+
+    public function getSource(){
+        return  parent::getSource(__CLASS__);
+    }
+
+    
+    /**
+     * 根据 主键查询记录
+     */
+    public static function findRowById($id){
+        return self::query()
+                ->where("id = :id:")
+                ->bind(array("id" => $id))
+                ->order("id")
+                ->execute();
     }
 
     /**
-     * Allows to query a set of records that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return Bank[]
+     * 根据条件查询语句
      */
-    public static function find($parameters = null)
-    {
-        return parent::find($parameters);
+    public static function findFirstByName($name){
+        return self::find("isValid = '1' and ename LIKE '%".$name."' ");
     }
-
-    /**
-     * Allows to query the first record that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return Bank
-     */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
-
 }

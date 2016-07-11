@@ -3,6 +3,8 @@
 use Phalcon\Mvc\View;
 use Phalcon\Loader as Loader;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+
 /**
 * Phalcon 的初始化文件
 */
@@ -30,10 +32,57 @@ class init
         $dbs = config("db");
         foreach ($dbs as $key => $value) {
             $this->di->set($key, function () use ($value) {
-                $adapter = $value['adapter'];
+                $adapter = isset($value['adapter']) ? $value['adapter'] : "Mysql";
                 unset($value['adapter']);
                 $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
                 return new $class($value);
+            });
+        }
+    }
+
+    /**
+     * 分析SQL语句
+     */
+    public function loadProfiler(){
+        $this->di->set('profiler', function(){
+            return new \Phalcon\Db\Profiler();
+        }, true);
+    }
+
+    public function loadModelManager(){
+        $this->di->set('modelsManager', function() {
+              return new ModelsManager();
+        });
+    }
+
+    /**
+     * 开发环境 的数据库加载  SQL 监听
+     */
+    public function loadDbEvent(){
+        $dbs = config("db");
+        foreach ($dbs as $key => $value) {
+            $this->di->set($key, function () use ($value) {
+
+                $eventsManager = new \Phalcon\Events\Manager();
+                $profiler = getDI("profiler");
+
+                $eventsManager->attach('db', function($event, $connection) use ($profiler) {
+                    if ($event->getType() == 'beforeQuery') {
+                        $profiler->startProfile($connection->getSQLStatement());
+                    }
+                    if ($event->getType() == 'afterQuery') {
+                        $profiler->stopProfile();
+                    }
+                });
+
+                $adapter = isset($value['adapter']) ? $value['adapter'] : "Mysql";
+                unset($value['adapter']);
+                $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
+
+                $connection = new $class($value);
+                $connection->setEventsManager($eventsManager);
+
+                return $connection;
             });
         }
     }

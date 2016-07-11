@@ -19,15 +19,33 @@
 
 // $config['slave'] = $config['master'];
 
-$config['chat_db_master'] = [
+// $config['db_master'] = [
+// 	'adapter' => 'Mysql',
+//     'host' => '172.20.10.247',
+//     'port' => '3306',
+//     'username' => 'dev',
+//     'password' => "ZD6&TF/2`jQX~2h`F',",
+//     'dbname' => 'chat_db'
+// ];
+
+// $config['db_slave'] = $config['db_master'];
+// $config['db_event'] = [
+//     'host' => '182.92.99.40',
+//     'port' => '3306',
+//     'username' => 'admin',
+//     'password' => "ronchen",
+//     'dbname' => 'admin'
+// ];
+
+$config['db_master'] = [
 	'adapter' => 'Mysql',
-    'host' => '172.20.10.247',
+    'host' => '182.92.99.40',
     'port' => '3306',
-    'username' => 'dev',
-    'password' => "ZD6&TF/2`jQX~2h`F',",
-    'dbname' => 'chat_db'
+    'username' => 'admin',
+    'password' => "ronchen",
+    'dbname' => 'admin'
 ];
 
-$config['chat_db_slave'] = $config['chat_db_master'];
+$config['db_slave'] = $config['db_master'];
 
 return $config;

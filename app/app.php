@@ -19,7 +19,12 @@ class APP extends init
     {
         $this->registerDirs();
         $this->loadCollections();
-        $this->loadDb();
+        // $this->loadDb();
+        // 测试环境监听 sql 语句
+        $this->loadProfiler();
+        $this->loadDbEvent();
+        $this->loadModelManager();
+
         $this->loadRedis();
         $this->loadCrypt();
         $this->loadSession();

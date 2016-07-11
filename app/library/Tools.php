@@ -11,7 +11,15 @@
 
 class Tools {
 
-
+	/**
+	 * 分页转化
+	 */
+	public static function converPage($page=1,$size=20){
+		return array(
+			"offset" => ($page - 1) * $size,
+			"limit"  => $size
+		);
+	}
 	
 	/**
 	 * 生成用户访问的token

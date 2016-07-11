@@ -14,9 +14,25 @@ class RedisService{
 
 	private $redis;
 
-	public function __construct($redis){
-		$this->redis = $redis;
-	}
+	public function __construct(){
+        $redisConfig = config('redis.default');
+        if (!empty($redisConfig)) {
+            $redis = new \Redis();
+            if ($redisConfig['timeout'] > 0) {
+                $redis->connect($redisConfig['host'], $redisConfig['port'], $redisConfig['timeout']);
+            } else {
+                $redis->connect($redisConfig['host'], $redisConfig['port']);
+            }
+            return $redis;
+        }
+	} 
+
+    /**
+     * redis 分库操作
+     */
+    public function select($num=0){
+       $this->redis->select($num);
+    }
 
 	/**
      * 设置值
