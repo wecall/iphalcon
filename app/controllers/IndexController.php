@@ -13,6 +13,7 @@ class IndexController extends Controller{
     public function index(){ 
     	
         $dp = new BDianping();
+        $dp->getLanguageBarJson("password");
         return ["2"];
     }
 

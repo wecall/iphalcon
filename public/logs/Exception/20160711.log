@@ -1,0 +1,22 @@
+error | 6660 | 1468206658.145 | 2016:07:11 11:10:58 | Service 'db' wasn't found in the dependency injection container 
+error | 6660 | 1468208809.986 | 2016:07:11 11:46:49 | Redis server went away 
+error | 6660 | 1468215691.365 | 2016:07:11 13:41:31 | Service 'modelsCache' wasn't found in the dependency injection container 
+error | 6660 | 1468220882.287 | 2016:07:11 15:08:02 | Model 'admin_bank' could not be loaded 
+error | 6660 | 1468221175.12 | 2016:07:11 15:12:55 | Can't obtain model's source from models list: 'Bank', when preparing: SELECT * FROM bank where name=:name: 
+error | 6660 | 1468221183.883 | 2016:07:11 15:13:03 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':name' at line 1 
+error | 6660 | 1468221215.105 | 2016:07:11 15:13:35 | SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':aname' at line 1 
+error | 6660 | 1468221788.589 | 2016:07:11 15:23:08 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221796.924 | 2016:07:11 15:23:16 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221801.732 | 2016:07:11 15:23:21 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221804.789 | 2016:07:11 15:23:24 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221805.234 | 2016:07:11 15:23:25 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221805.436 | 2016:07:11 15:23:25 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221805.618 | 2016:07:11 15:23:25 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221805.777 | 2016:07:11 15:23:25 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221805.925 | 2016:07:11 15:23:25 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221806.90 | 2016:07:11 15:23:26 | Literals are disabled in PHQL statements 
+error | 6660 | 1468221822.134 | 2016:07:11 15:23:42 | Literals are disabled in PHQL statements 
+error | 6660 | 1468231565.307 | 2016:07:11 18:06:05 | Wrong number of parameters 
+error | 6660 | 1468231573.239 | 2016:07:11 18:06:13 | Wrong number of parameters 
+error | 6660 | 1468231580.476 | 2016:07:11 18:06:20 | Wrong number of parameters 
+error | 6660 | 1468231714.817 | 2016:07:11 18:08:34 | Wrong number of parameters 

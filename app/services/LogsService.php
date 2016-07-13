@@ -13,15 +13,15 @@ namespace services;
 class LogsService{
 
     private static function setBasePath(){
-         SeasLog::setBasePath(LOGS_PATH);
+        \SeasLog::setBasePath(LOGS_PATH);
     }
 
     /**
      * 设置各种级别的日志
      */
-    public static function write($message="",$params = array(),$module="default",$level=SEASLOG_INFO){
+    public static function write($message="",$params = array(),$module="default",$level=\SEASLOG_INFO){
         self::setBasePath();
-        SeasLog::log($level,$message,$params,$module);
+        \SeasLog::log($level,$message,$params,$module);
     }
 
     /**
@@ -29,7 +29,7 @@ class LogsService{
      */
     public static function debug($message="",$params=array(),$module="default"){
         self::setBasePath();
-        SeasLog::debug($message,$params,$module);
+        \SeasLog::debug($message,$params,$module);
     }
 
     /**
@@ -37,7 +37,7 @@ class LogsService{
      */
     public static function info($message="",$params=array(),$module="default"){
         self::setBasePath();
-        SeasLog::info($message,$params,$module);
+        \SeasLog::info($message,$params,$module);
     }
 
     /**
@@ -45,7 +45,7 @@ class LogsService{
      */
     public static function notice($message="",$params=array(),$module="default"){
         self::setBasePath();
-        SeasLog::notice($message,$params,$module);
+        \SeasLog::notice($message,$params,$module);
     }
 
     /**
@@ -53,7 +53,7 @@ class LogsService{
      */
     public static function warning($message="",$params=array(),$module="default"){
         self::setBasePath();
-        SeasLog::warning($message,$params,$module);
+        \SeasLog::warning($message,$params,$module);
     }
 
     /**
@@ -61,6 +61,6 @@ class LogsService{
      */
     public static function error($message="",$params=array(),$module="default"){
         self::setBasePath();
-        SeasLog::error($message,$params,$module);
+        \SeasLog::error($message,$params,$module);
     }
 }
