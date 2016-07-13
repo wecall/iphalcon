@@ -58,6 +58,7 @@ class AbstractModel extends \Phalcon\Mvc\Model
         return self::$_cachepre.join(',', $uniqueKey);
     }
 
+    
     /**
      * 重写find ++++ cache 
      */

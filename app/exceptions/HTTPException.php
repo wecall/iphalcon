@@ -10,7 +10,7 @@ class HTTPException extends \Exception
         $this->errorCode = $internalCode . "";
         $this->message = $message;
         if (!$message) {
-            $codeMessage = config('errorCode.'.intval($internalCode));
+            $codeMessage = config('code.error.'.intval($internalCode));
             if ($codeMessage) {
                 $this->message = $codeMessage;
             }

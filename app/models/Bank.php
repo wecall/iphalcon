@@ -25,8 +25,7 @@ class Bank extends AbstractModel{
      * @var integer
      */
     public $isValid;
-
-
+    
     /**
      *
      * @var string
@@ -43,7 +42,17 @@ class Bank extends AbstractModel{
         return  parent::getSource(__CLASS__);
     }
 
-    
+    public function beforeSave()
+    {
+        $this->updatedTime = date('Y-m-d H:i:s');
+    }
+
+    public function beforeCreate()
+    {
+        $this->isValid     = 1;
+        $this->createdTime = date('Y-m-d H:i:s');
+    }
+
     /**
      * 根据 主键查询记录
      */

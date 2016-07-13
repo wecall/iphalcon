@@ -43,7 +43,8 @@ $config['db_master'] = [
     'port' => '3306',
     'username' => 'admin',
     'password' => "ronchen",
-    'dbname' => 'admin'
+    'dbname' => 'admin',
+    'charset' => 'utf8'
 ];
 
 $config['db_slave'] = $config['db_master'];
