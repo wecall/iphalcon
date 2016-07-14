@@ -12,3 +12,4 @@ Thumbs.db
 *.sublime-workspace
 .idea/
 public/cache/*
+app/config/*
