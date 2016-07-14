@@ -2,10 +2,58 @@
 
 use Phalcon\Mvc\Controller;
 
+use business\website\BGithub as BGithub;
+use business\website\BDianping as BDianping;
+
 class TestController extends Controller{
 
       // 常用方法
-      public function indexAction(){
+      public function index(){
+            // $bank = Bank::findFirst(['conditions' => 'id = ?1', 'bind' => [1 => "3"]]);
+            // if (!$bank) {
+            //       throw new HTTPException(ErrorCodeConsts::ERROR_CODE_BANK_NOT_EXIST);
+            // }
+
+            
+
+            $bank = Bank::findByPage(1);
+            // $bank = Bank::findFirstById("3");
+            // $bank = Bank::findFirstByName("bank");
+            // $bank = Bank::exec("SELECT * FROM Bank where ename=:ename:",array("ename"=>'bank'));
+            // $bank = Bank::findAll();
+            // Bank::find();
+            // $bank = Bank::find(array(
+            //       "name like '%银行' ",
+            //       "order" => 'id desc'
+            // ));
+            // \services\ProfilerService::getInstance()->recordSQL();
+
+            echo Bank::writeSql();
+            // foreach ($bank as $part) {
+            //     echo $part->id;
+            // }
+            // $profiles = getDI('profiler')->getProfiles();
+            // var_dump($profiles);
+            // //遍历输出
+            // foreach ($profiles as $profile) {
+            //    echo "SQL语句: ", $profile->getSQLStatement(), "\n";
+            //    echo "开始时间: ", $profile->getInitialTime(), "\n";
+            //    echo "结束时间: ", $profile->getFinalTime(), "\n";
+            //    echo "消耗时间: ", $profile->getTotalElapsedSeconds(), "\n";
+            // }
+
+            //直接获取最后一条sql语句
+            // var_dump($bank);
+            var_dump($bank->toArray());
+            exit();
+            // $bg = new BGithub();
+            // $bg->getLanguageBarJson("password");
+
+            // $bg = new BDianping();
+            // $bg->getSearchInfo("沪南电影院");
+            // exit;
+
+
             // session_start();
             // header("content-type:image/png");    //设置创建图像的格式
             // $image_width=70;                      //设置图像宽度
@@ -126,12 +174,12 @@ class TestController extends Controller{
             exit;
       }
 
-      public function codeAction(){
+      public function code(){
         exit(CaptchaService::build(6));
       }
 
       // 极验验证码登录
-      public function verifyAction(){
+      public function verify(){
             // 测试
             $GtSdk = new GeetestService();
 
@@ -143,7 +191,7 @@ class TestController extends Controller{
             echo $GtSdk->get_response_str();
       }
 
-      public function checkAction(){
+      public function check(){
             $GtSdk = new GeetestService();
             $user_id = $this->session->get("user_id");
             if ($this->session->get("gtserver") == 1) {

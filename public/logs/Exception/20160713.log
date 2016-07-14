@@ -1,0 +1,2 @@
+error | 12768 | 1468387508.780 | 2016:07:13 13:25:08 | SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'isValid' cannot be null 
+error | 12768 | 1468387523.352 | 2016:07:13 13:25:23 | SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'updatedTime' cannot be null 

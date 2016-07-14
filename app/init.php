@@ -3,8 +3,8 @@
 use Phalcon\Mvc\View;
 use Phalcon\Loader as Loader;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Cache\Backend\File as CacheFile;
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+
 /**
 * Phalcon 的初始化文件
 */
@@ -16,11 +16,15 @@ class init
             APP_PATH . '/controllers',
             APP_PATH . '/models',
             APP_PATH . '/consts',
+            APP_PATH . '/exceptions',
+            APP_PATH . '/responses',
             APP_PATH . '/services',
+            APP_PATH . '/router',
             APP_PATH . '/utils',
             APP_PATH . '/tasks',
-            APP_PATH . '/logs',
             APP_PATH . '/library',
+            APP_PATH . '/interface',
+            APP_PATH . '/business',
         ))->register();
     }
 
@@ -28,10 +32,57 @@ class init
         $dbs = config("db");
         foreach ($dbs as $key => $value) {
             $this->di->set($key, function () use ($value) {
-                $adapter = $value['adapter'];
+                $adapter = isset($value['adapter']) ? $value['adapter'] : "Mysql";
                 unset($value['adapter']);
                 $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
                 return new $class($value);
+            });
+        }
+    }
+
+    /**
+     * 分析SQL语句
+     */
+    public function loadProfiler(){
+        $this->di->set('profiler', function(){
+            return new \Phalcon\Db\Profiler();
+        }, true);
+    }
+
+    public function loadModelManager(){
+        $this->di->set('modelsManager', function() {
+              return new ModelsManager();
+        });
+    }
+
+    /**
+     * 开发环境 的数据库加载  SQL 监听
+     */
+    public function loadDbEvent(){
+        $dbs = config("db");
+        foreach ($dbs as $key => $value) {
+            $this->di->set($key, function () use ($value) {
+
+                $eventsManager = new \Phalcon\Events\Manager();
+                $profiler = getDI("profiler");
+
+                $eventsManager->attach('db', function($event, $connection) use ($profiler) {
+                    if ($event->getType() == 'beforeQuery') {
+                        $profiler->startProfile($connection->getSQLStatement());
+                    }
+                    if ($event->getType() == 'afterQuery') {
+                        $profiler->stopProfile();
+                    }
+                });
+
+                $adapter = isset($value['adapter']) ? $value['adapter'] : "Mysql";
+                unset($value['adapter']);
+                $class = 'Phalcon\Db\Adapter\Pdo\\' . $adapter;
+
+                $connection = new $class($value);
+                $connection->setEventsManager($eventsManager);
+
+                return $connection;
             });
         }
     }
@@ -54,28 +105,11 @@ class init
 
     public function loadNameSpaces() {
         $namespaces = config("namespaces");
+       
         $loader = new Loader();
         $loader->registerNamespaces($namespaces)->register();
     }
-
     
-    public function loadRouter() {
-        $config = config("router");
-        $this->di->set('router', function () use ($config) {
-            $router = new \Phalcon\Mvc\Router(false); //不使用框架自带默认路由
-            foreach ($config as $key => $value) {
-                if($key == 'default') {
-                    $router->setDefaults($value['path']);
-                }else if($key == 'notfound'){
-                    $router->notFound((array)$value['path']);
-                }else{
-                    $router->add($value['mapping'], $value['path']);
-                }
-            }
-            return $router;
-        });
-    }
-
     public function loadSession() {
         $config = config("common");
         $this->di->setShared('session', function () use ($config) {
@@ -105,32 +139,9 @@ class init
         });
     }
 
-    public function loadViewCache() {
-        $this ->di ->set('viewCache', function() {
-            $frontCache = new Output(['lifetime' => constant('CACHE_TIME')]);
-            $cache = new CacheFile($frontCache, [
-                'cacheDir' => CACHE_PATH 
-            ]);
-            return $cache;
-        });
-    }
-
-    public function loadView(){
-        $this->di->set('view', function (){
-            $view = new View();
-            $view->setViewsDir(APP_PATH.'/views/');
-            $view->registerEngines(array(
-                '.html' => function ($view, $di) {
-                        $volt = new VoltEngine($view, $di);
-                        $volt->setOptions(array(
-                            'compiledPath' => CACHE_PATH,
-                            'compiledSeparator' => '_',
-                            'compiledExtension' => '.php'
-                        ));
-                        return $volt;
-                    }
-            ));
-            return $view;
+    public function loadCollections(){
+        $this->di->set('collections', function () {
+            return include(dirname(__FILE__) . '/router/routerLoader.php');
         });
     }
 
@@ -179,6 +190,20 @@ function config($key = null, $default = null)
     return ArrUtil::get($arrConfig, $key, $default);
 }
 
+/**
+ * @param null $beanName
+ * @param null $parameters
+ * @return mixed|\Phalcon\DiInterface
+ */
+function getDI($beanName = null, $parameters = null)
+{
+    $di = \Phalcon\DI::getDefault();
+    if (!$beanName) {
+        return $di;
+    }
+
+    return $di->get($beanName, $parameters);
+}
 
 function getClientIp()
 {

@@ -7,6 +7,7 @@
  * @copyright ron_chen<ron_chen@hotmail.com>
  * @link http://www.ronchen.me/
  */
+
 class Fetcher{
 
 	private $http;
